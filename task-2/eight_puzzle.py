@@ -51,16 +51,18 @@ def h1(s):
 def h3(s):
     # implement this function
     board, _, _ = s
+    #Method 2
+    goal = (1, 2, 3, 4, 5, 6, 7, 8, 9)
     res = 0
     for idx in range(0, 9):
+      #ignore case 0 altogether;Change it to 9
+      case0 = 0
       if board[idx] == 0:
-        if idx <= 5 or idx % 3 != 2:
-          res += 1
-      else:
-        #Check for column miss
-        if (board[idx] - 1) % 3 != idx % 3 :
-          res += 1
-        #Check for row miss
-        if (board[idx] - 1) // 3 != idx // 3:
-          res += 1
+        case0 = 9
+      #Check for column miss
+      if (board[idx] + case0) % 3 != goal[idx] % 3 :
+        res += 1
+      #Check for row miss; -1 to make each row have the same val
+      if (board[idx] - 1 + case0) // 3 != (goal[idx] - 1) // 3:
+        res += 1
     return res
